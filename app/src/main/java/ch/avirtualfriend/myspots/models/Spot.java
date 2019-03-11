@@ -6,6 +6,8 @@ import java.util.List;
 public class Spot {
     private String id;
     private String name;
+    private double latitude;
+    private double longitude;
     private Date inputDate;
     private String comments;
     private List<Tag> tags;
