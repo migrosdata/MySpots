@@ -10,12 +10,14 @@ import ch.avirtualfriend.myspots.models.Picture;
 import ch.avirtualfriend.myspots.models.Spot;
 
 public class SpotService implements ISpotService {
-    public Collection<Spot> getAllSpots() {
-        ArrayList<Spot> spots = new ArrayList<>();
+    ArrayList<Spot> spots;
+
+    public SpotService() {
+        spots = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             Picture p = new Picture();
             Spot spot = new Spot(Integer.toString(i),
-                    "Best place " + 1,
+                    "Best place " + Integer.toString(i),
                     Math.random(),
                     Math.random(),
                     new Date(),
@@ -24,7 +26,19 @@ public class SpotService implements ISpotService {
                     null);
             spots.add(spot);
         }
+    }
+
+    public Collection<Spot> getAllSpots() {
         return spots;
+    }
+
+    public Spot getSpotById(String id) {
+        for (Spot spot : spots) {
+            if (spot.getId().equals(id)) {
+                return spot;
+            }
+        }
+        return null;
     }
 /*
     private Bitmap loadRandomImage() {
