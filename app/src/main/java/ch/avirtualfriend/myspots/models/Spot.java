@@ -1,5 +1,6 @@
 package ch.avirtualfriend.myspots.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,20 +11,18 @@ public class Spot {
     private double longitude;
     private Date inputDate;
     private String comments;
-    private List<Tag> tags;
-    private List<Picture> pictures;
+    private List<Tag> tags = new ArrayList<>();
+    private List<SpotImage> spotImages = new ArrayList<>();
 
     public Spot() {}
 
-    public Spot(String id, String name, double latitude, double longitude, Date inputDate, String comments, List<Tag> tags, List<Picture> pictures) {
+    public Spot(String id, String name, double latitude, double longitude, Date inputDate, String comments) {
         this.id = id;
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
         this.inputDate = inputDate;
         this.comments = comments;
-        this.tags = tags;
-        this.pictures = pictures;
     }
 
     public String getId() {
@@ -74,7 +73,7 @@ public class Spot {
         return tags;
     }
 
-    public List<Picture> getPictures() {
-        return pictures;
+    public List<SpotImage> getImages() {
+        return spotImages;
     }
 }
