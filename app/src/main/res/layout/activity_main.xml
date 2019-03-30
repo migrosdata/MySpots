@@ -5,7 +5,17 @@
     android:id="@+id/carviewSpots"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.Main.MainActivity">
+    tools:context=".activities.Main.MainActivity"
+    android:background="@android:color/background_dark">
+
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@android:color/background_dark"
+        android:text="+"
+        android:textColor="#6f9b9f"
+        android:textSize="36sp" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/view_spots"
         android:layout_width="match_parent"
