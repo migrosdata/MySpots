@@ -40,8 +40,19 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull SpotViewHolder holder, int position) {
-        holder.getSpotTitleText().setText(spots.get(position).getName());
-        holder.getSpotImageView().setImageBitmap(spots.get(position).getImages().get(0).getContent());
+        Spot currentSpot = spots.get(position);
+        holder.getSpotTitleText().setText(currentSpot.getName());
+        if (currentSpot.getImages().size() > 0) {
+            holder.getSpotImageView().setImageBitmap(spots.get(position).getImages().get(0).getContent());
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Longitude: ");
+        sb.append(currentSpot.getLongitude());
+        sb.append(" Lattitude:");
+        sb.append(currentSpot.getLatitude());
+        sb.append(" Altitude: ");
+        sb.append(currentSpot.getAltitude());
+        holder.getSpotDetailsText().setText(sb.toString());
     }
 
     @Override

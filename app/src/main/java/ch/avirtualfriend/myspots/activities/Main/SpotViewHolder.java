@@ -10,12 +10,14 @@ import ch.avirtualfriend.myspots.R;
 
 public class SpotViewHolder extends RecyclerView.ViewHolder {
     private TextView spotTitleText;
+    private TextView spotDetailsText;
     private ImageView spotImageView;
 
     public SpotViewHolder(@NonNull View itemView) {
         super(itemView);
         if(itemView != null) {
             spotTitleText = (TextView)itemView.findViewById(R.id.card_view_image_title);
+            spotDetailsText = (TextView)itemView.findViewById(R.id.card_view_image_details);
             spotImageView = (ImageView)itemView.findViewById(R.id.card_view_image);
         }
     }
@@ -27,4 +29,6 @@ public class SpotViewHolder extends RecyclerView.ViewHolder {
     public ImageView getSpotImageView() {
         return spotImageView;
     }
+
+    public TextView getSpotDetailsText() { return spotDetailsText; }
 }

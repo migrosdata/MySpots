@@ -35,12 +35,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RecyclerView rv = (RecyclerView) findViewById(R.id.view_spots);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        rv.setLayoutManager(linearLayoutManager);
-        SpotAdapter spotAdapter = new SpotAdapter(new SpotService().getAllSpots());
-        rv.setAdapter(spotAdapter);
-        Picasso.get().setLoggingEnabled(true);
+        loadSpotsView();
         Button buttonAdd = (Button)findViewById(R.id.button_add);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,5 +47,14 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void loadSpotsView() {
+        RecyclerView rv = (RecyclerView) findViewById(R.id.view_spots);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rv.setLayoutManager(linearLayoutManager);
+        SpotAdapter spotAdapter = new SpotAdapter(new SpotService().getAllSpots());
+        rv.setAdapter(spotAdapter);
+        Picasso.get().setLoggingEnabled(true);
     }
 }

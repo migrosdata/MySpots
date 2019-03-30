@@ -50,9 +50,11 @@ public class SpotService implements ISpotService {
     }
 
     private static void loadImage(SpotImage spotImage) {
+        String[] themes = {"city", "nature", "cat"};
+        String theme = themes[ThreadLocalRandom.current().nextInt(0, 3)];
         Log.d("DEBUG", "loadImage");
         Picasso.get()
-                .load("http://lorempixel.com/640/480/nature/" + "?a=" + Integer.toString(ThreadLocalRandom.current().nextInt()))
+                .load("http://lorempixel.com/640/480/" + theme + "/?a=" + Integer.toString(ThreadLocalRandom.current().nextInt()))
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                 .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
                 .into(spotImage);
