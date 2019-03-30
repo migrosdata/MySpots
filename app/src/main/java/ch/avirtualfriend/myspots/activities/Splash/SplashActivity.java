@@ -9,6 +9,7 @@ import android.widget.VideoView;
 
 import ch.avirtualfriend.myspots.R;
 import ch.avirtualfriend.myspots.activities.Main.MainActivity;
+import ch.avirtualfriend.myspots.services.SpotService;
 
 public class SplashActivity extends AppCompatActivity {
     VideoView videoView;
@@ -16,6 +17,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        SpotService.loadDefaultContent();
         startVideo();
     }
 

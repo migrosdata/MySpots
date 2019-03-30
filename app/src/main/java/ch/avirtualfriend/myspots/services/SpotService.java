@@ -3,7 +3,10 @@ package ch.avirtualfriend.myspots.services;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.util.Log;
 
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -11,27 +14,32 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import ch.avirtualfriend.myspots.models.Picture;
 import ch.avirtualfriend.myspots.models.Spot;
 import ch.avirtualfriend.myspots.models.SpotImage;
 
 public class SpotService implements ISpotService {
-    ArrayList<Spot> spots;
+    static ArrayList<Spot> spots;
 
     public SpotService() {
-        loadDefaultContent();
+        //loadDefaultContent();
     }
 
-    private void loadDefaultContent() {
+    public static void loadDefaultContent() {
+        if (spots != null) {
+            return;
+        }
         spots = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             Picture p = new Picture();
             Spot spot = new Spot(Integer.toString(i),
                     "Best place " + Integer.toString(i),
-                    Math.random(),
-                    Math.random(),
+                    ThreadLocalRandom.current().nextDouble(0, 91),
+                    ThreadLocalRandom.current().nextDouble(0, 91),
                     new Date(),
                     "#YOLO");
             SpotImage spotImage = new SpotImage();
@@ -41,11 +49,16 @@ public class SpotService implements ISpotService {
         }
     }
 
-    private void loadImage(SpotImage spotImage) {
-        Picasso.get().load("http://lorempixel.com/640/480/nature/").into(spotImage);
+    private static void loadImage(SpotImage spotImage) {
+        Log.d("DEBUG", "loadImage");
+        Picasso.get()
+                .load("http://lorempixel.com/640/480/nature/" + "?a=" + Integer.toString(ThreadLocalRandom.current().nextInt()))
+                .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
+                .into(spotImage);
     }
 
-    public Collection<Spot> getAllSpots() {
+    public List<Spot> getAllSpots() {
         return spots;
     }
 
