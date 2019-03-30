@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -40,5 +41,16 @@ public class MainActivity extends AppCompatActivity {
         SpotAdapter spotAdapter = new SpotAdapter(new SpotService().getAllSpots());
         rv.setAdapter(spotAdapter);
         Picasso.get().setLoggingEnabled(true);
+        Button buttonAdd = (Button)findViewById(R.id.button_add);
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SpotsActivity.class);
+                Bundle b = new Bundle();
+                intent.putExtras(b); //Put your id to your next Intent
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }
