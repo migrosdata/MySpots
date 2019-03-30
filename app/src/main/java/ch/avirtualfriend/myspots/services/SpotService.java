@@ -62,6 +62,11 @@ public class SpotService implements ISpotService {
         return spots;
     }
 
+    @Override
+    public void addSpot(Spot spot) {
+        spots.add(spot);
+    }
+
     public Spot getSpotById(String id) {
         for (Spot spot : spots) {
             if (spot.getId().equals(id)) {

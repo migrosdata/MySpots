@@ -9,6 +9,7 @@ public class Spot {
     private String name;
     private double latitude;
     private double longitude;
+    private double altitude;
     private Date inputDate;
     private String comments;
     private List<Tag> tags = new ArrayList<>();
@@ -51,6 +52,14 @@ public class Spot {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public double getAltitude() {
+        return altitude;
+    }
+
+    public void setAltitude(double altitude) {
+        this.altitude = altitude;
     }
 
     public Date getInputDate() {

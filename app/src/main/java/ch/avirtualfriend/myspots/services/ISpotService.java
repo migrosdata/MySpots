@@ -7,4 +7,5 @@ import ch.avirtualfriend.myspots.models.Spot;
 
 public interface ISpotService {
      List<Spot> getAllSpots();
+     void addSpot(Spot spot);
 }
