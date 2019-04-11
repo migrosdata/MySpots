@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import ch.avirtualfriend.myspots.R;
 import ch.avirtualfriend.myspots.activities.Main.MainActivity;
 import ch.avirtualfriend.myspots.models.Spot;
@@ -115,7 +117,7 @@ public class SpotsActivity extends AppCompatActivity {
                         //locationManager.requestLocationUpdates(provider, 400, 1, this);
                         locationManager.requestLocationUpdates(
                                 LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
-                        spot.setName("yo");
+                        spot.setName("yo" +  Long.toString(ThreadLocalRandom.current().nextLong()));
                         SpotService spotService = new SpotService();
                         spotService.addSpot(spot);
                     }

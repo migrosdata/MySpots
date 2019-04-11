@@ -34,7 +34,7 @@ public class SpotService implements ISpotService {
             return;
         }
         spots = new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 15; i++) {
             Picture p = new Picture();
             Spot spot = new Spot(Integer.toString(i),
                     "Best place " + Integer.toString(i),
@@ -50,11 +50,13 @@ public class SpotService implements ISpotService {
     }
 
     private static void loadImage(SpotImage spotImage) {
-        String[] themes = {"city", "nature", "cat"};
-        String theme = themes[ThreadLocalRandom.current().nextInt(0, 3)];
-        Log.d("DEBUG", "loadImage");
+        String[] themes = {"city", "nature", "cats", "food"};
+        String theme = themes[ThreadLocalRandom.current().nextInt(0, 4)];
+        String url = "http://lorempixel.com/640/480/" + theme;
+        //url = "https://loremflickr.com/g/640/480/paris";
+        Log.d("DEBUG", "loadImage " + theme);
         Picasso.get()
-                .load("http://lorempixel.com/640/480/" + theme + "/?a=" + Integer.toString(ThreadLocalRandom.current().nextInt()))
+                .load(url + "/?a=" + Integer.toString(ThreadLocalRandom.current().nextInt()))
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                 .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
                 .into(spotImage);

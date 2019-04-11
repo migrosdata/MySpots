@@ -10,13 +10,26 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-    <TextView
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textSpotName"
+            android:text="Name" />
+
+        <TextView
         android:id="@+id/textViewInt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
         tools:layout_editor_absoluteX="176dp"
         tools:layout_editor_absoluteY="117dp" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/button_add"

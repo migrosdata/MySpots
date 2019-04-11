@@ -3,6 +3,7 @@ package ch.avirtualfriend.myspots.activities.Main;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,10 +41,14 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull SpotViewHolder holder, int position) {
+        Log.d("DEBUG", "position " + Integer.toString(position));
         Spot currentSpot = spots.get(position);
         holder.getSpotTitleText().setText(currentSpot.getName());
         if (currentSpot.getImages().size() > 0) {
-            holder.getSpotImageView().setImageBitmap(spots.get(position).getImages().get(0).getContent());
+            //holder.getSpotImageView().setImageBitmap(spots.get(position).getImages().get(0).getContent());
+            holder.getSpotImageView().setImageBitmap(currentSpot.getImages().get(0).getContent());
+        } else {
+            Log.d("DEBUG", "no image");
         }
         StringBuilder sb = new StringBuilder();
         sb.append("Longitude: ");
