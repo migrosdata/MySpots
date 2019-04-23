@@ -17,6 +17,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 import ch.avirtualfriend.myspots.R;
@@ -25,7 +32,7 @@ import ch.avirtualfriend.myspots.models.Spot;
 import ch.avirtualfriend.myspots.services.Location.SpotLocationListener;
 import ch.avirtualfriend.myspots.services.SpotService;
 
-public class SpotsActivity extends AppCompatActivity {
+public class SpotsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +62,10 @@ public class SpotsActivity extends AppCompatActivity {
             textViewInt.setText(spotId);
             Log.d(null, spotId);
         }
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     private void addNewSpot() {
@@ -91,6 +102,9 @@ public class SpotsActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     99);
         }
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
         //locationManager.requestLocationUpdates(
         //        LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
     }
@@ -159,5 +173,14 @@ public class SpotsActivity extends AppCompatActivity {
         intent.putExtras(b); //Put your id to your next Intent
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng sydney = new LatLng(-33.852, 151.211);
+        googleMap.addMarker(new MarkerOptions().position(sydney)
+                .title("Marker in Sydney"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
     }
 }
