@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.location.LocationManager;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -72,7 +73,6 @@ public class SpotsActivity extends AppCompatActivity implements OnMapReadyCallba
         Spot spot = new Spot();
         LocationManager locationManager = (LocationManager)
                 getSystemService(Context.LOCATION_SERVICE);
-        SpotLocationListener locationListener = new SpotLocationListener(spot);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -102,12 +102,11 @@ public class SpotsActivity extends AppCompatActivity implements OnMapReadyCallba
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     99);
         }
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
         //locationManager.requestLocationUpdates(
         //        LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -175,12 +174,15 @@ public class SpotsActivity extends AppCompatActivity implements OnMapReadyCallba
         finish();
     }
 
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng sydney = new LatLng(-33.852, 151.211);
-        googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title("Marker in Sydney"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        SpotLocationListener locationListener = new SpotLocationListener();
+        LatLng myLocation = new LatLng(locationListener.getLocation().getLatitude(), locationListener.getLocation().getLongitude());
+        //LatLng sydney = new LatLng(-33.852, 151.211);
+        googleMap.addMarker(new MarkerOptions().position(myLocation)
+                .title("Ici"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
 
     }
 }
