@@ -19,3 +19,6 @@ gradle/wrapper/gradle-wrapper.properties
 build.gradle
 gradle/wrapper/gradle-wrapper.properties
 build.gradle
+.idea/codeStyles/Project.xml
+build.gradle
+gradle/wrapper/gradle-wrapper.properties
