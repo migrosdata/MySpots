@@ -11,3 +11,11 @@
 /build
 /captures
 .externalNativeBuild
+.idea/codeStyles/Project.xml
+.idea/encodings.xml
+build.gradle
+gradle/wrapper/gradle-wrapper.properties
+.idea/codeStyles/Project.xml
+build.gradle
+gradle/wrapper/gradle-wrapper.properties
+build.gradle
