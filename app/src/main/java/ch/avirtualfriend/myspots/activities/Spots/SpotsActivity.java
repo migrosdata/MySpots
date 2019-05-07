@@ -26,6 +26,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import ch.avirtualfriend.myspots.R;
 import ch.avirtualfriend.myspots.activities.Main.MainActivity;
 import ch.avirtualfriend.myspots.models.Spot;
+import ch.avirtualfriend.myspots.persistence.SpotDataSource;
 import ch.avirtualfriend.myspots.services.Location.SpotLocationListener;
 import ch.avirtualfriend.myspots.services.SpotService;
 
@@ -33,17 +34,18 @@ public class SpotsActivity extends AppCompatActivity implements OnMapReadyCallba
 
     private Spot currentSpot;
     private GoogleMap gmap;
-
+    private SpotDataSource spotDataSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spots);
+        spotDataSource = new SpotDataSource(this);
         Button buttonAdd = (Button) findViewById(R.id.button_add);
         //addNewSpot();
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                long rowId = spotDataSource.insertSpot(currentSpot);
                 //goToMain();
             }
         });
@@ -109,8 +111,8 @@ public class SpotsActivity extends AppCompatActivity implements OnMapReadyCallba
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         LocationManager locationManager = (LocationManager)
                 getSystemService(Context.LOCATION_SERVICE);
-        Spot spot = new Spot();
-        SpotLocationListener locationListener = new SpotLocationListener(spot,gmap);
+        currentSpot = new Spot();
+        SpotLocationListener locationListener = new SpotLocationListener(currentSpot,gmap);
         switch (requestCode) {
             case 99: {
                 // If request is cancelled, the result arrays are empty.
@@ -127,9 +129,9 @@ public class SpotsActivity extends AppCompatActivity implements OnMapReadyCallba
                         //locationManager.requestLocationUpdates(provider, 400, 1, this);
                         locationManager.requestLocationUpdates(
                                 LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
-                        spot.setName("yo" +  Long.toString(ThreadLocalRandom.current().nextLong()));
+                        currentSpot.setName("yo" +  Long.toString(ThreadLocalRandom.current().nextLong()));
                         SpotService spotService = new SpotService();
-                        spotService.addSpot(spot);
+                        spotService.addSpot(currentSpot);
                     }
 
                 } else {
@@ -140,8 +142,8 @@ public class SpotsActivity extends AppCompatActivity implements OnMapReadyCallba
                 }
                 return;
             }
-
         }
+
     }
     private void showAlert() {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -167,9 +169,6 @@ public class SpotsActivity extends AppCompatActivity implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
         this.gmap = googleMap;
         requestLocationPermition();
-
-
-
     }
 
     private void goToMain() {

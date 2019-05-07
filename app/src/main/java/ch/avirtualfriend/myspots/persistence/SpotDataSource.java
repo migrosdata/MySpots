@@ -26,7 +26,7 @@ public class SpotDataSource {
         values.put(SpotDatabaseHelper.COLUMN_COMMENT, spot.getComments());
         values.put(SpotDatabaseHelper.COLUMN_LATITUDE, spot.getLatitude());
         values.put(SpotDatabaseHelper.COLUMN_LONGITUDE, spot.getLongitude());
-        values.put(SpotDatabaseHelper.COLUMN_INPUTDATE, spot.getInputDate().toString());
+        //values.put(SpotDatabaseHelper.COLUMN_INPUTDATE, spot.getInputDate().toString());
 
         long newRowId = db.insert(SpotDatabaseHelper.TABLE_NAME, null, values);
 
