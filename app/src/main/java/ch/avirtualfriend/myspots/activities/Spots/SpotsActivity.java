@@ -39,7 +39,7 @@ public class SpotsActivity extends AppCompatActivity implements OnMapReadyCallba
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spots);
-        spotDataSource = new SpotDataSource(this);
+        spotDataSource = new SpotDataSource(getApplicationContext());
         Button buttonAdd = (Button) findViewById(R.id.button_add);
         //addNewSpot();
         buttonAdd.setOnClickListener(new View.OnClickListener() {
